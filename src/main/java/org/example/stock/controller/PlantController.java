@@ -36,10 +36,22 @@ public class PlantController {
         return "plant_form";
     }
 
-    @PostMapping("/save")
+    @PostMapping("/saved")
     public String savePlant(@ModelAttribute Plant plant, RedirectAttributes ra) {
-        plantService.updatePlant(plant);
-        ra.addFlashAttribute("message", "Товар успешно сохранен.");
+        if (plant.getId() == null) {
+            plantService.savePlant(plant);
+            ra.addFlashAttribute("message", "Товар успешно добавлен.");
+        } else {
+            plantService.updatePlant(plant);
+            ra.addFlashAttribute("message", "Товар успешно сохранен.");
+        }
+        return "redirect:/plants";
+    }
+
+    @PostMapping("/created")
+    public String createPlant(@ModelAttribute Plant plant, RedirectAttributes ra) {
+        plantService.savePlant(plant);
+        ra.addFlashAttribute("message", "Товар успешно добавлен.");
         return "redirect:/plants";
     }
 
@@ -48,7 +60,7 @@ public class PlantController {
         try {
             Plant plant = plantService.getPlantById(id);
             model.addAttribute("plant", plant);
-            model.addAttribute("pageTitle", "Edit Plant (ID: " + id + ")");
+            model.addAttribute("pageTitle", "Изменение позиции");
             return "plant_form";
         } catch (Exception e) {
             ra.addFlashAttribute("message", e.getMessage());

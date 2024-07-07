@@ -9,7 +9,7 @@
     <h1 th:text="${pageTitle}">Добавление позиции</h1>
 </header>
 <main>
-    <form th:action="@{/plants/save}" th:object="${plant}" method="post">
+    <form th:action="${plant.id == null ? '/plants/created' : '/plants/saved'}" th:object="${plant}" method="post">
         <input type="hidden" th:field="*{id}" />
 
         <div>

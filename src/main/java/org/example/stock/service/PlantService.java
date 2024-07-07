@@ -28,6 +28,10 @@ public class PlantService {
         return plantRepository.findById(id).orElseThrow(() -> new RuntimeException("Plant not found"));
     }
 
+    public Plant savePlant(Plant plant) {
+        return plantRepository.save(plant);
+    }
+
     public Plant updatePlant(Plant plant) {
         Plant existingPlant = plantRepository.findById(plant.getId()).orElseThrow(() -> new RuntimeException("Plant not found"));
 

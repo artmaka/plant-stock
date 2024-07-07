@@ -21,7 +21,7 @@ public class PlantStockApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(PlantStockApplication.class, args);
-        System.out.print("Done");
+        System.out.print("Done\n");
     }
 
     /*@Bean

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Товары</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <script>
+        function confirmDelete(event, plantId) {
+            event.preventDefault();
+            if (confirm('Подтвердить удаление?')) {
+                window.location.href = '/plants/delete/' + plantId;
+            }
+        }
+    </script>
+</head>
+<body>
+<header>
+    <h1>Товары</h1>
+</header>
+<main>
+    <div>
+        <a href="/plants/new" class="button">Добавить новый товар</a>
+    </div>
+
+    <form th:action="@{/plants/search}" method="get">
+        <div>
+            <label>Сортировать по:</label>
+            <select name="sortBy">
+                <option value="" selected disabled hidden></option>
+                <option value="name">Имя</option>
+                <option value="price">Цена</option>
+                <option value="quantity">Количество</option>
+                <option value="createdAt">Дата создания</option>
+            </select>
+
+            <label>В порядке:</label>
+            <select name="sortOrder">
+                <option value="" selected disabled hidden></option>
+                <option value="asc">Возрастания</option>
+                <option value="desc">Убывания</option>
+            </select>
+            <button type="submit">Поиск</button>
+        </div>
+    </form>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Название</th>
+            <th>Артикул</th>
+            <th>Описание</th>
+            <th>Категория</th>
+            <th>Цена</th>
+            <th>Количество</th>
+            <th>Дата обновления</th>
+            <th>Дата создания</th>
+            <th>Действия</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${listPlants == null or #lists.isEmpty(listPlants)}">
+            <td colspan="9">Нет товаров</td>
+        </tr>
+        <tr th:each="plant : ${listPlants}" th:object="${plant}">
+            <td th:text="${plant.name}">Plant Name</td>
+            <td th:text="${plant.article}">Article</td>
+            <td th:text="${plant.description}">Description</td>
+            <td th:text="${plant.category}">Category</td>
+            <td th:text="${plant.price}">Price</td>
+            <td th:text="${plant.quantity}">Quantity</td>
+            <td th:text="${#temporals.format(plant.lastQuantityChange, 'dd.MM.yy HH:mm')}">Last Quantity Change</td>
+            <td th:text="${#temporals.format(plant.createdAt, 'dd.MM.yy HH:mm')}">Created At</td>
+            <td>
+                <a th:href="@{/plants/edit/{id}(id=${plant.id})}">Обновить</a>
+                <a href="#" th:onclick="'confirmDelete(event, ' + ${plant.id} + ');'">Удалить</a>
+                <a th:href="@{/plants/{id}(id=${plant.id})}">Подробнее</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <p th:if="${message}" th:text="${message}"></p>
+</main>
+<footer>
+    <p>&copy; 2024 Plant Stock</p>
+</footer>
+</body>
+</html>

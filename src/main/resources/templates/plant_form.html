@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${pageTitle}">Добавить</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<header>
+    <h1 th:text="${pageTitle}">Добавление позиции</h1>
+</header>
+<main>
+    <form th:action="@{/plants/save}" th:object="${plant}" method="post">
+        <input type="hidden" th:field="*{id}" />
+
+        <div>
+            <label>Название:</label>
+            <input type="text" th:field="*{name}" required/>
+        </div>
+
+        <div>
+            <label>Артикул:</label>
+            <input type="text" th:field="*{article}" required/>
+        </div>
+
+        <div>
+            <label>Описание:</label>
+            <textarea th:field="*{description}" required></textarea>
+        </div>
+
+        <div>
+            <label>Категория:</label>
+            <input type="text" th:field="*{category}" required/>
+        </div>
+
+        <div>
+            <label>Цена:</label>
+            <input type="number" th:field="*{price}" step="0.01" required/>
+        </div>
+
+        <div>
+            <label>Количество:</label>
+            <input type="number" th:field="*{quantity}" required/>
+        </div>
+
+        <div>
+            <button type="submit" class="button">Сохранить</button>
+        </div>
+    </form>
+    <p th:if="${message}" th:text="${message}"></p>
+</main>
+<footer>
+    <p>&copy; 2024 Plant Stock</p>
+</footer>
+</body>
+</html>

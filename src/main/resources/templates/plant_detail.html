@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Подробнее</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<header>
+    <h1>О растении</h1>
+</header>
+<main>
+    <div>
+        <label>Название:</label>
+        <span th:text="${plant.name}">Plant Name</span>
+    </div>
+    <div>
+        <label>Артикул:</label>
+        <span th:text="${plant.article}">Article</span>
+    </div>
+    <div>
+        <label>Описание:</label>
+        <span th:text="${plant.description}">Description</span>
+    </div>
+    <div>
+        <label>Категория:</label>
+        <span th:text="${plant.category}">Category</span>
+    </div>
+    <div>
+        <label>Цена:</label>
+        <span th:text="${plant.price}">Price</span>
+    </div>
+    <div>
+        <label>Количество:</label>
+        <span th:text="${plant.quantity}">Quantity</span>
+    </div>
+    <div>
+        <label>Дата обновления:</label>
+        <span th:text="${plant.lastQuantityChange}">Last Quantity Change</span>
+    </div>
+    <div>
+        <label>Дата создания:</label>
+        <span th:text="${plant.createdAt}">Created At</span>
+    </div>
+    <div>
+        <a href="/plants" class="button">Назад</a>
+    </div>
+</main>
+<footer>
+    <p>&copy; 2024 Plant Stock</p>
+</footer>
+</body>
+</html>
+

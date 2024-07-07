@@ -23,7 +23,7 @@
  
 3. Запустите PostgreSQL базу данных и настройте соединение в application.properties:
    ```bash
-   	spring.datasource.url=jdbc:postgresql://localhost:5432/YOUR_DATABASE
+   spring.datasource.url=jdbc:postgresql://localhost:5432/YOUR_DATABASE
 	spring.datasource.username=YOUR_USERNAME
 	spring.datasource.password=YOUR_PASSWORD
    
